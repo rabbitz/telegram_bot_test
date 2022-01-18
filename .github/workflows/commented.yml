@@ -17,4 +17,4 @@ jobs:
             Repository: [${{ github.event.issue_comment.issue.title }}](${{ github.event.issue_comment.issue.html_url }})
             See comment: ${{ github.event.issue_comment.comment.html_url }}
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event }} event."
+      - run: echo "🎉 The job was automatically triggered by a ${{ toJson(github.event) }} event."
