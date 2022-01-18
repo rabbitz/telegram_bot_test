@@ -34,13 +34,11 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           disable_web_page_preview: true
+          format: markdown
           message: |
-            ${{ github.event.sender.login }} created a pull request comment:
+            *${{ github.event.sender.login }}_ created a pull request comment:
             Repository: [${{ github.event.issue.title }}](${{ github.event.issue.html_url }})
             See comment: ${{ github.event.comment.html_url }}
-      - run: |
-          echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-          echo "🎉 The job was automatically triggered by a ${{ toJson(github.event) }} event."
   
 
   issue_commented:
@@ -55,6 +53,6 @@ jobs:
           disable_web_page_preview: true
           format: markdown
           message: |
-            ${{ github.event.issue_comment.sender.login }} created a issue comment:
+            *${{ github.event.issue_comment.sender.login }} created a issue comment:
             Repository: [${{ github.event.issue_comment.issue.title }}](${{ github.event.issue_comment.issue.html_url }})
             See comment: ${{ github.event.issue_comment.comment.html_url }}
