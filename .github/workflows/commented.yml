@@ -1,49 +1,9 @@
 name: telegram message
 on:
-  pull_request:
-    types: [opened, review_requested]
-  issue_comment:
-    types: [created]
   pull_request_review_comment:
     types: [created]
 
-jobs:
-  pr_reviewed:
-    if: ${{ github.event.pull_request }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: PR reviewed
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          disable_web_page_preview: true
-          format: markdown
-          debug: true
-          message: |
-            ${{ github.actor }} created pull request:
-            Commit message: ${{ github.event.commits[0].message }}
-            Repository: ${{ github.repository }}
-            Reviewers: **${{ join(github.event.pull_request.requested_reviewers.*.login, ', ') }}**
-            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
-
-  pr_commented:
-    if: ${{ github.event.issue.pull_request }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: PR comment
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          disable_web_page_preview: true
-          format: markdown
-          message: |
-            **${{ github.event.sender.login }}** created a pull request comment:
-            Repository: [${{ github.event.issue.title }}](${{ github.event.issue.html_url }})
-            See comment: ${{ github.event.comment.html_url }}
-  
-
+jobs:  
   issue_commented:
     runs-on: ubuntu-latest
     steps:
