@@ -19,9 +19,6 @@ jobs:
 
             Repository: ${{ github.repository }}
 
-            [inline mention of a user](tg://user?id=1186859866)
-
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
-            [inline mention of a user](tg://user?id=1186859866)
             
-            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+            [@Rocky](tg://user?id=1186859866)
