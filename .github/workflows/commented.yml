@@ -1,26 +1,56 @@
-name: commented
-on: issue_comment
-  
-
+name: telegram message
+on:
+  pull_request:
+    types: [opened, review_requested]
+  issue_comment:
 jobs:
+  pr_reviewed:
+    if: ${{ github.event.pull_request }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: PR reviewed
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          disable_web_page_preview: true
+          format: markdown
+          debug: true
+          message: |
+            ${{ github.actor }} created pull request:
+            Commit message: ${{ github.event.commits[0].message }}
+            Repository: ${{ github.repository }}
+            Reviewers: **${{ join(github.event.pull_request.requested_reviewers.*.login, ', ') }}**
+            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+
   pr_commented:
-    # This job only runs for pull request comments
-    name: PR comment
     if: ${{ github.event.issue.pull_request }}
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo A comment on PR $NUMBER
-        env:
-          NUMBER: ${{ github.event.issue.number }}
+      - name: PR comment
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          disable_web_page_preview: true
+          format: markdown
+          message: |
+            ${{ github.event.pull_request_review_comment.sender.login }} created a pull request comment:
+            Repository: [${{ github.event.issue_comment.issue.title }}](${{ github.event.issue_comment.issue.html_url }})
+            See comment: ${{ github.event.pull_request_review_comment.comment.html_url }}
 
   issue_commented:
-    # This job only runs for issue comments
-    name: Issue comment
     if: ${{ !github.event.issue.pull_request }}
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo A comment on issue $NUMBER
-        env:
-          NUMBER: ${{ github.event.issue.number }}
+      - name: Issue comment
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          disable_web_page_preview: true
+          format: markdown
+          message: |
+            ${{ github.event.issue_comment.sender.login }} created a issue comment:
+            Repository: [${{ github.event.issue_comment.issue.title }}](${{ github.event.issue_comment.issue.html_url }})
+            See comment: ${{ github.event.issue_comment.comment.html_url }}
