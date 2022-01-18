@@ -29,9 +29,6 @@ jobs:
     steps:
       - name: PR comment
         uses: appleboy/telegram-action@master
-        run: |
-          echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-          echo "🎉 The job was automatically triggered by a ${{ toJson(github.event) }} event."
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
@@ -40,6 +37,9 @@ jobs:
             ${{ github.event.pull_request_review_comment.sender.login }} created a pull request comment:
             Repository: [${{ github.event.issue_comment.issue.title }}](${{ github.event.issue_comment.issue.html_url }})
             See comment: ${{ github.event.pull_request_review_comment.comment.html_url }}
+      - run: |
+          echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+          echo "🎉 The job was automatically triggered by a ${{ toJson(github.event) }} event."
   
 
   issue_commented:
