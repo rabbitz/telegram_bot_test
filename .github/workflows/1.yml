@@ -23,3 +23,5 @@ jobs:
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
             
             [@Rocky](tg://user?id=1186859866)
+
+            to: ${{ secrets.TELEGRAM_TO }}
