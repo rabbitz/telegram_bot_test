@@ -4,6 +4,9 @@ on:
     types: [opened, review_requested]
   issue_comment:
     types: [created]
+  pull_request_review_comment:
+    types: [created]
+
 jobs:
   pr_reviewed:
     if: ${{ github.event.pull_request }}
@@ -42,7 +45,7 @@ jobs:
   
 
   issue_commented:
-    if: ${{ !github.event.issue.pull_request }}
+    if: ${{ github.event.issue.pull_request_review_comment }}
     runs-on: ubuntu-latest
     steps:
       - name: Issue comment
@@ -56,3 +59,4 @@ jobs:
             *${{ github.event.issue_comment.sender.login }} created a issue comment:
             Repository: [${{ github.event.issue_comment.issue.title }}](${{ github.event.issue_comment.issue.html_url }})
             See comment: ${{ github.event.issue_comment.comment.html_url }}
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event }} event."
