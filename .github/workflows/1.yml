@@ -11,11 +11,13 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
+          parse_mode: Markdown
           message: |
             ${{ github.actor }} created commit:
             Commit message: ${{ github.event.commits[0].message }}
             
             Repository: ${{ github.repository }}  
             <a href="tg://user?id=1186859866">inline mention of a user</a>
+            [inline mention of a user](tg://user?id=1186859866)
             
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
