@@ -1,7 +1,5 @@
 name: telegram message
-on:
-  pull_request_review_comment:
-    types: [created, edited]
+on: pull_request_review
 
 jobs:  
   issue_commented:
