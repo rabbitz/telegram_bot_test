@@ -45,7 +45,6 @@ jobs:
   
 
   issue_commented:
-    if: ${{ github.event.issue.pull_request_review_comment }}
     runs-on: ubuntu-latest
     steps:
       - name: Issue comment
