@@ -11,13 +11,17 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          parse_mode: Markdown
+          disable_web_page_preview: true
+          format: markdown
           message: |
-            ${{ github.actor }} created commit:
+            ${{ github.actor }} created pull request:
             Commit message: ${{ github.event.commits[0].message }}
-            
-            Repository: ${{ github.repository }}  
-            <a href="tg://user?id=1186859866">inline mention of a user</a>
+
+            Repository: ${{ github.repository }}
+
+            [inline mention of a user](tg://user?id=1186859866)
+
+            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
             [inline mention of a user](tg://user?id=1186859866)
             
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
