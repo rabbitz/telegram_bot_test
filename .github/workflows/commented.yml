@@ -43,6 +43,7 @@ jobs:
             Repository: [${{ github.event.issue.title }}](${{ github.event.issue.html_url }})
             See comment: ${{ github.event.comment.html_url }}
             Author: ${{ github.event.pull_request.user.login }}
+      - run: echo "🎉 The job was automatically triggered by a ${{ toJson(github.event) }} event."
 
   pr_commented:
     if: github.event_name == 'pull_request_review_comment'
@@ -60,3 +61,4 @@ jobs:
             Repository: [${{ github.event.pull_request.title }}](${{ github.event.pull_request.html_url }})
             See comment: ${{ github.event.comment.html_url }}
             Author: ${{ github.event.pull_request.user.login }}
+      - run: echo "🎉 The job was automatically triggered by a ${{ toJson(github.event) }} event."
