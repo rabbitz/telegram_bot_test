@@ -1,7 +1,6 @@
 name: telegram message
 on:
   pull_request:
-    types: [opened]
   issue_comment:
     types: [created]
   pull_request_review_comment:
