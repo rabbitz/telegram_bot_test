@@ -28,7 +28,7 @@ jobs:
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
 
   issue_commented:
-    if: ${{ github.event.issue_comment }}
+    if: ${{ github.event.issue.pull_request }}
     runs-on: ubuntu-latest
     steps:
       - name: Issue comment
@@ -44,7 +44,7 @@ jobs:
             See comment: ${{ github.event.comment.html_url }}
 
   pr_commented:
-    if: ${{ github.event.pull_request_review_comment }}
+    if: ${{github.event.pull_request_review_comment }}
     runs-on: ubuntu-latest
     steps:
       - name: PR comment
