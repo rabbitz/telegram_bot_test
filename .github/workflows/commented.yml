@@ -9,7 +9,7 @@ on:
 
 jobs:
   pr_commented:
-  if : ${{ github.event_name == "pull_request_review_comment" }}
+    if: github.event_name == 'pull_request_review_comment'
     runs-on: ubuntu-latest
     steps:
       - name: PR comment
