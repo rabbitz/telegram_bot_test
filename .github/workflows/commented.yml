@@ -45,8 +45,6 @@ jobs:
             Repository: [${{ github.event.issue.title }}](${{ github.event.issue.html_url }})
             See comment: ${{ github.event.comment.html_url }}
             Author: ${{ github.event.issue.user.login }}
-      - run: echo "🎉 The job was automatically triggered by a ${{ secrets.TELEGRAM_TO }} event."
-      - run: echo "🎉 The job was automatically triggered by a ${{ secrets.TELEGRAM_TOKEN }} event."
 
   pr_commented:
     if: github.event_name == 'pull_request_review_comment'
