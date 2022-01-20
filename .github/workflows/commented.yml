@@ -24,7 +24,7 @@ jobs:
           debug: true
           message: |
             ${{ github.actor }} created pull request:
-            Commit message: ${{ github.event.commits[0].message }}
+            Commit message: ${{ github.event.pull_request.title }}
             Repository: ${{ github.repository }}
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
             Reviewers: ** ${{ join(github.event.pull_request.requested_reviewers.*.login, ', ') }} **
