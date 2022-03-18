@@ -36,5 +36,7 @@ jobs:
         format: markdown
         debug: true
         message: |
-          ${{ github.event }}
+          RuboCop Failed:
+          Jobs trigger: ${{ github.event.sender.login }}
+          Jobs Url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
