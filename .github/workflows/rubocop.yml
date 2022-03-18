@@ -26,21 +26,15 @@ jobs:
         bundle install --jobs 4 --retry 3
     - name: Run RuboCop
       run: bundle exec rubocop --parallel
-
-  run-if-fail:
-    runs-on: ubuntu-latest
-    needs: [build]
-    if: needs.build.result == 'failure'
-    steps:
-      - name: Create pull request
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          disable_web_page_preview: true
-          format: markdown
-          debug: true
-          message: |
-            test
-
+    - name: Step To run on failure
+      if: ${{ failure() }}
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        disable_web_page_preview: true
+        format: markdown
+        debug: true
+        message: |
+          test
 
