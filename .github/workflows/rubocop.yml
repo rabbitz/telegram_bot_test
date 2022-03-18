@@ -37,6 +37,6 @@ jobs:
         debug: true
         message: |
           RuboCop Failed:
-          Jobs trigger: ${{ github.event.sender.login }}
-          Jobs Url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          Action Trigger: ${{ github.event.sender.login }}
+          Action Url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
